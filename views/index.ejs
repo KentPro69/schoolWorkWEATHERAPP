@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <script>
+      fetch("/weather")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((city) => {
+            let div = document.createElement("div");
+            div.className = "city-card";
+            div.setAttribute(
+              "onclick",
+              `location.href='/cityPage/${city.name}'`
+            );
+            let h2 = document.createElement("h2");
+            let p = document.createElement("p");
+            let parentDiv = document.getElementById("parentDIV");
+            h2.textContent = city.name;
+            p.textContent = city.conditions;
+            div.append(h2);
+            div.append(p);
+            parentDiv.append(div);
+          });
+        })
+        .catch((error) => console.error(error));
+    </script>
+  </head>
+
+  <body>
+    <h1>Weather App</h1>
+
+    <div class="city-cards" id="parentDIV">
+      <!-- <div class="city-card" onclick="location.href='/cityPage/NewYork';">
+        <h2>New York City</h2>
+        <p>Partly cloudy</p>
+      </div>
+      <div class="city-card" onclick="location.href='/cityPage/Canberra';">
+        <h2>Canberra</h2>
+        <p>Sunny</p>
+      </div>
+      <div class="city-card" onclick="location.href='/cityPage/Tokyo';">
+        <h2>Tokyo</h2>
+        <p>Snowy</p>
+      </div> -->
+      <!-- Add more city cards here -->
+    </div>
+  </body>
+</html>
